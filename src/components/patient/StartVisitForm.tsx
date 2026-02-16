@@ -11,7 +11,6 @@ interface StartVisitFormProps {
 
 export default function StartVisitForm({ navigate }: StartVisitFormProps) {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
-  const [painLevel, setPainLevel] = useState<number>(5);
 
   const commonSymptoms = [
     'Chest Pain',
@@ -89,50 +88,6 @@ export default function StartVisitForm({ navigate }: StartVisitFormProps) {
               placeholder="Describe any other symptoms or concerns..."
               className="rounded-xl min-h-24 resize-none text-base"
             />
-          </div>
-        </div>
-
-        {/* Pain Level Slider */}
-        <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm">
-          <h3 className="text-slate-900 mb-4">How would you rate your pain level on a scale of 1–10?</h3>
-          
-          <div className="space-y-6">
-            {/* Pain Level Display */}
-            <div className="text-center">
-              <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${
-                painLevel >= 9 ? 'bg-red-500' :
-                painLevel >= 7 ? 'bg-orange-500' :
-                painLevel >= 4 ? 'bg-yellow-500' : 'bg-green-500'
-              }`}>
-                <span className="text-white">{painLevel}</span>
-              </div>
-            </div>
-
-            {/* Slider */}
-            <div className="relative">
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={painLevel}
-                onChange={(e) => setPainLevel(Number(e.target.value))}
-                className="w-full h-3 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-teal-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-teal-500 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
-              />
-              <div className="flex justify-between mt-2 text-slate-600">
-                <span>1 (Minimal)</span>
-                <span>10 (Severe)</span>
-              </div>
-            </div>
-
-            {/* Pain Level Description */}
-            <div className="bg-slate-50 rounded-xl p-4">
-              <p className="text-slate-700">
-                {painLevel >= 9 && "Severe, unbearable pain"}
-                {painLevel >= 7 && painLevel < 9 && "Very distressing, significant pain"}
-                {painLevel >= 4 && painLevel < 7 && "Moderate, uncomfortable pain"}
-                {painLevel < 4 && "Mild, manageable pain"}
-              </p>
-            </div>
           </div>
         </div>
 

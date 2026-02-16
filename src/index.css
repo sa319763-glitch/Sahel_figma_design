@@ -94,7 +94,6 @@
     --color-yellow-100: oklch(.973 .071 103.193);
     --color-yellow-200: oklch(.945 .129 101.54);
     --color-yellow-500: oklch(.795 .184 86.047);
-    --color-yellow-600: oklch(.681 .162 75.834);
     --color-yellow-700: oklch(.554 .135 66.442);
     --color-green-50: oklch(.982 .018 155.826);
     --color-green-100: oklch(.962 .044 156.743);
@@ -1033,6 +1032,10 @@
     max-height: var(--radix-select-content-available-height);
   }
 
+  .max-h-\[90vh\] {
+    max-height: 90vh;
+  }
+
   .min-h-16 {
     min-height: calc(var(--spacing) * 16);
   }
@@ -1247,10 +1250,6 @@
 
   .scroll-my-1 {
     scroll-margin-block: calc(var(--spacing) * 1);
-  }
-
-  .appearance-none {
-    appearance: none;
   }
 
   .grid-cols-1 {
@@ -2191,10 +2190,6 @@
     color: var(--color-white);
   }
 
-  .text-yellow-600 {
-    color: var(--color-yellow-600);
-  }
-
   .text-yellow-700 {
     color: var(--color-yellow-700);
   }
@@ -2479,12 +2474,6 @@
   @media (hover: hover) {
     .hover\:bg-orange-50:hover {
       background-color: var(--color-orange-50);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-orange-100:hover {
-      background-color: var(--color-orange-100);
     }
   }
 
@@ -2894,6 +2883,12 @@
   }
 
   @media (width >= 40rem) {
+    .sm\:col-span-2 {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  @media (width >= 40rem) {
     .sm\:mx-0 {
       margin-inline: calc(var(--spacing) * 0);
     }
@@ -2986,6 +2981,12 @@
   @media (width >= 40rem) {
     .sm\:max-w-\[425px\] {
       max-width: 425px;
+    }
+  }
+
+  @media (width >= 40rem) {
+    .sm\:max-w-\[500px\] {
+      max-width: 500px;
     }
   }
 
@@ -3275,55 +3276,6 @@
 
   .\[\&_svg\:not\(\[class\*\=\'text-\'\]\)\]\:text-muted-foreground svg:not([class*="text-"]) {
     color: var(--muted-foreground);
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:h-6::-moz-range-thumb {
-    height: calc(var(--spacing) * 6);
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:w-6::-moz-range-thumb {
-    width: calc(var(--spacing) * 6);
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:cursor-pointer::-moz-range-thumb {
-    cursor: pointer;
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:rounded-full::-moz-range-thumb {
-    border-radius: 3.40282e38px;
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:border-0::-moz-range-thumb {
-    border-style: var(--tw-border-style);
-    border-width: 0;
-  }
-
-  .\[\&\:\:-moz-range-thumb\]\:bg-teal-500::-moz-range-thumb {
-    background-color: var(--color-teal-500);
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:h-6::-webkit-slider-thumb {
-    height: calc(var(--spacing) * 6);
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:w-6::-webkit-slider-thumb {
-    width: calc(var(--spacing) * 6);
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:cursor-pointer::-webkit-slider-thumb {
-    cursor: pointer;
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:appearance-none::-webkit-slider-thumb {
-    appearance: none;
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:rounded-full::-webkit-slider-thumb {
-    border-radius: 3.40282e38px;
-  }
-
-  .\[\&\:\:-webkit-slider-thumb\]\:bg-teal-500::-webkit-slider-thumb {
-    background-color: var(--color-teal-500);
   }
 
   :is(.\*\:\[span\]\:last\:flex > *):is(span):last-child {

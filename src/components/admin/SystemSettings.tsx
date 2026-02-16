@@ -1,4 +1,4 @@
-import { ArrowLeft, Save, Plus, Edit, Trash2, Building2, Bed, Users } from 'lucide-react';
+import { ArrowLeft, Save, Plus, Edit, Trash2, Building2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -21,19 +21,44 @@ interface SystemSettingsProps {
 }
 
 export default function SystemSettings({ navigate }: SystemSettingsProps) {
-  const [isAddRoomOpen, setIsAddRoomOpen] = useState(false);
-  const [isEditRoomOpen, setIsEditRoomOpen] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState<any>(null);
+  const [isAddHospitalOpen, setIsAddHospitalOpen] = useState(false);
+  const [isEditHospitalOpen, setIsEditHospitalOpen] = useState(false);
+  const [selectedHospital, setSelectedHospital] = useState<any>(null);
 
-  const rooms = [
-    { id: 'R-001', name: 'Triage 1', zone: 'Triage Area', capacity: 1, status: 'Active', equipment: 'Basic Monitoring' },
-    { id: 'R-002', name: 'Triage 2', zone: 'Triage Area', capacity: 1, status: 'Active', equipment: 'Basic Monitoring' },
-    { id: 'R-003', name: 'Room 1', zone: 'Treatment', capacity: 2, status: 'Active', equipment: 'Full Medical Suite' },
-    { id: 'R-004', name: 'Room 2', zone: 'Treatment', capacity: 2, status: 'Active', equipment: 'Full Medical Suite' },
-    { id: 'R-005', name: 'Room 3', zone: 'Treatment', capacity: 2, status: 'Active', equipment: 'Full Medical Suite' },
-    { id: 'R-006', name: 'Assessment 1', zone: 'Assessment', capacity: 1, status: 'Active', equipment: 'Standard Monitoring' },
-    { id: 'R-007', name: 'Assessment 2', zone: 'Assessment', capacity: 1, status: 'Active', equipment: 'Standard Monitoring' },
-    { id: 'R-008', name: 'Trauma Bay', zone: 'Critical', capacity: 3, status: 'Active', equipment: 'Advanced Life Support' },
+  const hospitals = [
+    {
+      id: 'HOSP-001',
+      name: 'King Fahad Medical City',
+      code: 'KFMC',
+      address: 'King Fahad Road, Riyadh',
+      phone: '+966 11 288 9999',
+      status: 'Active',
+      erCapacity: 20,
+      latitude: '24.7136',
+      longitude: '46.6753',
+    },
+    {
+      id: 'HOSP-002',
+      name: 'King Abdulaziz Medical City',
+      code: 'KAMC',
+      address: 'Makkah Al Mukarramah Branch Rd, Riyadh',
+      phone: '+966 11 252 0088',
+      status: 'Active',
+      erCapacity: 25,
+      latitude: '24.7854',
+      longitude: '46.6221',
+    },
+    {
+      id: 'HOSP-003',
+      name: 'Prince Sultan Military Medical City',
+      code: 'PSMMC',
+      address: 'Makkah Al Mukarramah Rd, Riyadh',
+      phone: '+966 11 477 7714',
+      status: 'Active',
+      erCapacity: 18,
+      latitude: '24.7689',
+      longitude: '46.6978',
+    },
   ];
 
   return (
@@ -46,82 +71,83 @@ export default function SystemSettings({ navigate }: SystemSettingsProps) {
           </button>
           <div>
             <h2 className="text-white mb-1">System Settings</h2>
-            <p className="text-teal-100 text-sm">Configure ER layout and preferences</p>
+            <p className="text-teal-100 text-sm">Configure hospitals and system preferences</p>
           </div>
         </div>
       </div>
 
       <div className="px-4 sm:px-6 py-4 sm:py-6">
-        <Tabs defaultValue="rooms" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="rooms">Rooms & Zones</TabsTrigger>
-            <TabsTrigger value="hospital">Hospital Info</TabsTrigger>
+        <Tabs defaultValue="hospitals" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="hospitals">Hospitals</TabsTrigger>
             <TabsTrigger value="preferences">Preferences</TabsTrigger>
           </TabsList>
 
-          {/* Rooms & Zones Tab */}
-          <TabsContent value="rooms" className="space-y-4">
+          {/* Hospitals Tab */}
+          <TabsContent value="hospitals" className="space-y-4">
             <Button
-              onClick={() => setIsAddRoomOpen(true)}
+              onClick={() => setIsAddHospitalOpen(true)}
               className="w-full bg-teal-500 hover:bg-teal-600 text-white rounded-full h-12 flex items-center justify-center gap-2"
             >
               <Plus className="w-5 h-5" />
-              Add New Room/Zone
+              Add New Hospital
             </Button>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-3">
               <div className="bg-white rounded-2xl p-4 shadow-sm text-center">
-                <h3 className="text-slate-900 mb-1">{rooms.length}</h3>
-                <p className="text-slate-600 text-xs">Total Rooms</p>
+                <h3 className="text-slate-900 mb-1">{hospitals.length}</h3>
+                <p className="text-slate-600 text-xs">Total Hospitals</p>
               </div>
               <div className="bg-white rounded-2xl p-4 shadow-sm text-center">
-                <h3 className="text-slate-900 mb-1">{rooms.filter(r => r.status === 'Active').length}</h3>
+                <h3 className="text-slate-900 mb-1">{hospitals.filter(h => h.status === 'Active').length}</h3>
                 <p className="text-slate-600 text-xs">Active</p>
               </div>
               <div className="bg-white rounded-2xl p-4 shadow-sm text-center">
-                <h3 className="text-slate-900 mb-1">{rooms.reduce((acc, r) => acc + r.capacity, 0)}</h3>
-                <p className="text-slate-600 text-xs">Total Capacity</p>
+                <h3 className="text-slate-900 mb-1">{hospitals.reduce((acc, h) => acc + h.erCapacity, 0)}</h3>
+                <p className="text-slate-600 text-xs">Total ER Capacity</p>
               </div>
             </div>
 
-            {/* Rooms List */}
+            {/* Hospitals List */}
             <div className="space-y-3">
-              {rooms.map((room) => (
-                <div key={room.id} className="bg-white rounded-2xl p-4 shadow-sm">
+              {hospitals.map((hospital) => (
+                <div key={hospital.id} className="bg-white rounded-2xl p-4 shadow-sm">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <h4 className="text-slate-900">{room.name}</h4>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${room.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-700'}`}>
-                          {room.status}
+                        <Building2 className="w-5 h-5 text-teal-600 flex-shrink-0" />
+                        <h4 className="text-slate-900">{hospital.name}</h4>
+                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${hospital.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-700'}`}>
+                          {hospital.status}
                         </span>
                       </div>
-                      <p className="text-slate-600 text-sm">ID: {room.id}</p>
+                      <p className="text-slate-600 text-sm mb-1">Code: {hospital.code} • ID: {hospital.id}</p>
+                      <p className="text-slate-500 text-xs">{hospital.address}</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="p-3 bg-slate-50 rounded-lg">
-                      <p className="text-slate-600 text-xs mb-1">Zone</p>
-                      <p className="text-slate-900 text-sm">{room.zone}</p>
+                      <p className="text-slate-600 text-xs mb-1">Contact</p>
+                      <p className="text-slate-900 text-sm">{hospital.phone}</p>
                     </div>
                     <div className="p-3 bg-slate-50 rounded-lg">
-                      <p className="text-slate-600 text-xs mb-1">Capacity</p>
-                      <p className="text-slate-900 text-sm">{room.capacity} patient(s)</p>
+                      <p className="text-slate-600 text-xs mb-1">ER Capacity</p>
+                      <p className="text-slate-900 text-sm">{hospital.erCapacity} patients</p>
                     </div>
                   </div>
 
                   <div className="mb-3">
-                    <p className="text-slate-600 text-xs mb-1">Equipment</p>
-                    <p className="text-slate-900 text-sm">{room.equipment}</p>
+                    <p className="text-slate-600 text-xs mb-1">Location</p>
+                    <p className="text-slate-900 text-sm">Lat: {hospital.latitude}, Long: {hospital.longitude}</p>
                   </div>
 
                   <div className="flex gap-2 pt-3 border-t border-slate-100">
                     <button
                       onClick={() => {
-                        setSelectedRoom(room);
-                        setIsEditRoomOpen(true);
+                        setSelectedHospital(hospital);
+                        setIsEditHospitalOpen(true);
                       }}
                       className="flex-1 flex items-center justify-center gap-2 text-blue-600 hover:bg-blue-50 py-2 rounded-lg transition-colors"
                     >
@@ -135,69 +161,6 @@ export default function SystemSettings({ navigate }: SystemSettingsProps) {
                   </div>
                 </div>
               ))}
-            </div>
-          </TabsContent>
-
-          {/* Hospital Info Tab */}
-          <TabsContent value="hospital" className="space-y-4">
-            <div className="bg-white rounded-2xl p-5 shadow-sm">
-              <h3 className="text-slate-900 mb-4">Hospital Information</h3>
-              
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="hospital-name">Hospital Name</Label>
-                  <Input id="hospital-name" defaultValue="King Fahad Medical City" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="hospital-code">Hospital Code</Label>
-                  <Input id="hospital-code" defaultValue="KFMC" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="er-department">ER Department Name</Label>
-                  <Input id="er-department" defaultValue="Emergency Department" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="contact-number">Contact Number</Label>
-                  <Input id="contact-number" defaultValue="+966 11 288 9999" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input id="address" defaultValue="King Fahad Road, Riyadh, Saudi Arabia" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="operating-hours">Operating Hours</Label>
-                  <Input id="operating-hours" defaultValue="24/7 Emergency Services" />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-5 shadow-sm">
-              <h3 className="text-slate-900 mb-4">Location Settings</h3>
-              
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="latitude">Latitude</Label>
-                  <Input id="latitude" defaultValue="24.7136" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="longitude">Longitude</Label>
-                  <Input id="longitude" defaultValue="46.6753" />
-                </div>
-
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                  <div>
-                    <p className="text-slate-900">Show on Patient Map</p>
-                    <p className="text-slate-600 text-xs">Display hospital in patient selection map</p>
-                  </div>
-                  <Switch defaultChecked />
-                </div>
-              </div>
             </div>
           </TabsContent>
 
@@ -389,95 +352,109 @@ export default function SystemSettings({ navigate }: SystemSettingsProps) {
         </Button>
       </div>
 
-      {/* Add Room Dialog */}
-      <Dialog open={isAddRoomOpen} onOpenChange={setIsAddRoomOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+      {/* Add Hospital Dialog */}
+      <Dialog open={isAddHospitalOpen} onOpenChange={setIsAddHospitalOpen}>
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Add New Room/Zone</DialogTitle>
+            <DialogTitle>Add New Hospital</DialogTitle>
             <DialogDescription>
-              Create a new room or zone in the ER layout.
+              Register a new hospital in the Sahel ER system.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="new-room-name">Room Name</Label>
-              <Input id="new-room-name" placeholder="e.g., Room 4" />
+              <Label htmlFor="new-hospital-name">Hospital Name</Label>
+              <Input id="new-hospital-name" placeholder="Enter hospital name" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="new-room-zone">Zone</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select zone" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="triage">Triage Area</SelectItem>
-                  <SelectItem value="treatment">Treatment</SelectItem>
-                  <SelectItem value="assessment">Assessment</SelectItem>
-                  <SelectItem value="critical">Critical Care</SelectItem>
-                  <SelectItem value="observation">Observation</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label htmlFor="new-hospital-code">Hospital Code</Label>
+              <Input id="new-hospital-code" placeholder="e.g., KFMC" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="new-room-capacity">Capacity</Label>
-              <Input id="new-room-capacity" type="number" placeholder="Number of patients" defaultValue="1" />
+              <Label htmlFor="new-hospital-address">Address</Label>
+              <Input id="new-hospital-address" placeholder="Full hospital address" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="new-room-equipment">Equipment</Label>
-              <Input id="new-room-equipment" placeholder="e.g., Full Medical Suite" />
+              <Label htmlFor="new-hospital-phone">Contact Number</Label>
+              <Input id="new-hospital-phone" placeholder="+966 XX XXX XXXX" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="new-hospital-capacity">ER Capacity</Label>
+              <Input id="new-hospital-capacity" type="number" placeholder="Maximum patients in ER" defaultValue="20" />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="new-hospital-lat">Latitude</Label>
+                <Input id="new-hospital-lat" placeholder="24.7136" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="new-hospital-long">Longitude</Label>
+                <Input id="new-hospital-long" placeholder="46.6753" />
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+              <div>
+                <p className="text-slate-900">Show on Patient Map</p>
+                <p className="text-slate-600 text-xs">Display hospital in patient selection map</p>
+              </div>
+              <Switch defaultChecked />
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsAddRoomOpen(false)}>
+            <Button variant="outline" onClick={() => setIsAddHospitalOpen(false)}>
               Cancel
             </Button>
-            <Button className="bg-teal-500 hover:bg-teal-600" onClick={() => setIsAddRoomOpen(false)}>
-              Create Room
+            <Button className="bg-teal-500 hover:bg-teal-600" onClick={() => setIsAddHospitalOpen(false)}>
+              Add Hospital
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Edit Room Dialog */}
-      <Dialog open={isEditRoomOpen} onOpenChange={setIsEditRoomOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+      {/* Edit Hospital Dialog */}
+      <Dialog open={isEditHospitalOpen} onOpenChange={setIsEditHospitalOpen}>
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Room/Zone</DialogTitle>
+            <DialogTitle>Edit Hospital</DialogTitle>
             <DialogDescription>
-              Update room information and settings.
+              Update hospital information and settings.
             </DialogDescription>
           </DialogHeader>
-          {selectedRoom && (
+          {selectedHospital && (
             <div className="space-y-4 py-4">
               <div className="space-y-2">
-                <Label htmlFor="edit-room-name">Room Name</Label>
-                <Input id="edit-room-name" defaultValue={selectedRoom.name} />
+                <Label htmlFor="edit-hospital-name">Hospital Name</Label>
+                <Input id="edit-hospital-name" defaultValue={selectedHospital.name} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-room-zone">Zone</Label>
-                <Select defaultValue={selectedRoom.zone.toLowerCase().replace(' ', '-')}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="triage-area">Triage Area</SelectItem>
-                    <SelectItem value="treatment">Treatment</SelectItem>
-                    <SelectItem value="assessment">Assessment</SelectItem>
-                    <SelectItem value="critical">Critical Care</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="edit-hospital-code">Hospital Code</Label>
+                <Input id="edit-hospital-code" defaultValue={selectedHospital.code} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-room-capacity">Capacity</Label>
-                <Input id="edit-room-capacity" type="number" defaultValue={selectedRoom.capacity} />
+                <Label htmlFor="edit-hospital-address">Address</Label>
+                <Input id="edit-hospital-address" defaultValue={selectedHospital.address} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-room-equipment">Equipment</Label>
-                <Input id="edit-room-equipment" defaultValue={selectedRoom.equipment} />
+                <Label htmlFor="edit-hospital-phone">Contact Number</Label>
+                <Input id="edit-hospital-phone" defaultValue={selectedHospital.phone} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="edit-room-status">Status</Label>
-                <Select defaultValue={selectedRoom.status.toLowerCase()}>
+                <Label htmlFor="edit-hospital-capacity">ER Capacity</Label>
+                <Input id="edit-hospital-capacity" type="number" defaultValue={selectedHospital.erCapacity} />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="edit-hospital-lat">Latitude</Label>
+                  <Input id="edit-hospital-lat" defaultValue={selectedHospital.latitude} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-hospital-long">Longitude</Label>
+                  <Input id="edit-hospital-long" defaultValue={selectedHospital.longitude} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-hospital-status">Status</Label>
+                <Select defaultValue={selectedHospital.status.toLowerCase()}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -488,13 +465,20 @@ export default function SystemSettings({ navigate }: SystemSettingsProps) {
                   </SelectContent>
                 </Select>
               </div>
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                <div>
+                  <p className="text-slate-900">Show on Patient Map</p>
+                  <p className="text-slate-600 text-xs">Display hospital in patient selection map</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditRoomOpen(false)}>
+            <Button variant="outline" onClick={() => setIsEditHospitalOpen(false)}>
               Cancel
             </Button>
-            <Button className="bg-teal-500 hover:bg-teal-600" onClick={() => setIsEditRoomOpen(false)}>
+            <Button className="bg-teal-500 hover:bg-teal-600" onClick={() => setIsEditHospitalOpen(false)}>
               Save Changes
             </Button>
           </DialogFooter>

@@ -9,7 +9,6 @@ import StartVisitForm from './components/patient/StartVisitForm';
 import HospitalSelection from './components/patient/HospitalSelection';
 import QueueStatus from './components/patient/QueueStatus';
 import Notifications from './components/patient/Notifications';
-import VisitHistory from './components/patient/VisitHistory';
 import StaffLogin from './components/staff/StaffLogin';
 import StaffDashboard from './components/staff/StaffDashboard';
 import PatientDetails from './components/staff/PatientDetails';
@@ -17,7 +16,6 @@ import QueueManagement from './components/staff/QueueManagement';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import UserManagement from './components/admin/UserManagement';
-import TriageRules from './components/admin/TriageRules';
 import PatientOverview from './components/admin/PatientOverview';
 import SystemSettings from './components/admin/SystemSettings';
 
@@ -32,7 +30,6 @@ export type Screen =
   | 'hospital-selection'
   | 'queue-status'
   | 'notifications'
-  | 'visit-history'
   | 'staff-login'
   | 'staff-dashboard'
   | 'patient-details'
@@ -40,7 +37,6 @@ export type Screen =
   | 'admin-login'
   | 'admin-dashboard'
   | 'user-management'
-  | 'triage-rules'
   | 'patient-overview'
   | 'system-settings';
 
@@ -92,7 +88,6 @@ function App() {
       {currentScreen === 'hospital-selection' && <HospitalSelection navigate={navigate} />}
       {currentScreen === 'queue-status' && <QueueStatus navigate={navigate} data={mockTriageData} />}
       {currentScreen === 'notifications' && <Notifications navigate={navigate} />}
-      {currentScreen === 'visit-history' && <VisitHistory navigate={navigate} />}
       {currentScreen === 'staff-login' && <StaffLogin navigate={navigate} />}
       {currentScreen === 'staff-dashboard' && <StaffDashboard navigate={navigate} onPatientSelect={handlePatientSelect} />}
       {currentScreen === 'patient-details' && selectedPatientId && <PatientDetails navigate={navigate} patientId={selectedPatientId} />}
@@ -100,7 +95,6 @@ function App() {
       {currentScreen === 'admin-login' && <AdminLogin navigate={navigate} />}
       {currentScreen === 'admin-dashboard' && <AdminDashboard navigate={navigate} />}
       {currentScreen === 'user-management' && <UserManagement navigate={navigate} />}
-      {currentScreen === 'triage-rules' && <TriageRules navigate={navigate} />}
       {currentScreen === 'patient-overview' && <PatientOverview navigate={navigate} />}
       {currentScreen === 'system-settings' && <SystemSettings navigate={navigate} />}
     </div>

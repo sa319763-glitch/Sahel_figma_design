@@ -1,4 +1,4 @@
-import { User, Clock, MapPin, Bell, FileText, Activity, AlertCircle, ChevronRight, LogOut } from 'lucide-react';
+import { User, Bell, Activity, ChevronRight, LogOut } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Screen } from '../../App';
@@ -71,19 +71,6 @@ export default function PatientDashboard({ navigate }: PatientDashboardProps) {
                   <User className="w-5 h-5 text-blue-600" />
                 </div>
                 <span className="text-slate-900">My Profile</span>
-              </div>
-              <ChevronRight className="w-5 h-5 text-slate-400" />
-            </button>
-
-            <button 
-              onClick={() => navigate('visit-history')}
-              className="w-full flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors active:scale-98"
-            >
-              <div className="flex items-center gap-3">
-                <div className="bg-purple-100 rounded-full p-2">
-                  <FileText className="w-5 h-5 text-purple-600" />
-                </div>
-                <span className="text-slate-900">Visit History</span>
               </div>
               <ChevronRight className="w-5 h-5 text-slate-400" />
             </button>

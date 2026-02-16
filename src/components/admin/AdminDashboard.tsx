@@ -35,9 +35,9 @@ export default function AdminDashboard({ navigate }: AdminDashboardProps) {
             <p className="text-teal-100 text-xs sm:text-sm">Staff Users</p>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-3 sm:p-4 text-center">
-            <Activity className="w-5 sm:w-6 h-5 sm:h-6 text-white mx-auto mb-2" />
+            <Users className="w-5 sm:w-6 h-5 sm:h-6 text-white mx-auto mb-2" />
             <h3 className="text-white mb-1">142</h3>
-            <p className="text-teal-100 text-xs sm:text-sm">Patients Today</p>
+            <p className="text-teal-100 text-xs sm:text-sm">Patient Users</p>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-3 sm:p-4 text-center">
             <AlertTriangle className="w-5 sm:w-6 h-5 sm:h-6 text-white mx-auto mb-2" />
@@ -95,20 +95,7 @@ export default function AdminDashboard({ navigate }: AdminDashboardProps) {
               </div>
               <div>
                 <h4 className="text-slate-900 mb-1">User Management</h4>
-                <p className="text-slate-600 text-sm">Manage staff accounts and roles</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => navigate('triage-rules')}
-              className="flex items-center gap-3 p-4 bg-orange-50 rounded-xl hover:bg-orange-100 transition-colors active:scale-98 text-left"
-            >
-              <div className="bg-orange-500 rounded-full p-3">
-                <AlertTriangle className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h4 className="text-slate-900 mb-1">Triage Rules</h4>
-                <p className="text-slate-600 text-sm">Configure triage and alerts</p>
+                <p className="text-slate-600 text-sm">Manage patient and staff accounts</p>
               </div>
             </button>
 
@@ -127,14 +114,14 @@ export default function AdminDashboard({ navigate }: AdminDashboardProps) {
 
             <button 
               onClick={() => navigate('system-settings')}
-              className="flex items-center gap-3 p-4 bg-slate-100 rounded-xl hover:bg-slate-200 transition-colors active:scale-98 text-left"
+              className="flex items-center gap-3 p-4 bg-slate-100 rounded-xl hover:bg-slate-200 transition-colors active:scale-98 text-left sm:col-span-2"
             >
               <div className="bg-slate-500 rounded-full p-3">
                 <Settings className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h4 className="text-slate-900 mb-1">System Settings</h4>
-                <p className="text-slate-600 text-sm">Configure ER rooms and preferences</p>
+                <p className="text-slate-600 text-sm">Configure hospitals and preferences</p>
               </div>
             </button>
           </div>
